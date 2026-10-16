@@ -1,3 +1,5 @@
 src/
+full/
 home.html
-podglad.jpg
+*.png
+podglad*.jpg
