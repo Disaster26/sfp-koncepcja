@@ -176,11 +176,15 @@ footer .w{display:flex;justify-content:space-between;align-items:center;gap:20px
   .w{padding:0 18px}
   .top .w{height:68px}
   .logo .znak{font-size:1.65rem}.logo .opis{font-size:.6rem;padding-left:10px}
-  .hero{min-height:0}
-  .hero .tytul{padding-top:300px;padding-bottom:22px}
+  .hero{min-height:0;display:block;background:var(--navy)}
+  .hero picture{position:relative;display:block;height:auto;aspect-ratio:960/1170;max-height:72svh}
+  .hero picture img{position:absolute;object-position:50% 100%}
+  .hero picture::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,26,47,.55) 0,rgba(10,26,47,0) 20%,rgba(10,26,47,0) 62%,var(--navy) 100%)}
+  .hero .tytul{position:relative;margin-top:-92px;padding-top:0;padding-bottom:22px}
   .hero h1{font-size:clamp(3.2rem,15.5vw,4.6rem)}
   .hero .sub{font-size:1rem;margin-top:12px}
-  .hero::before{background:linear-gradient(180deg,rgba(10,26,47,.6) 0,rgba(10,26,47,0) 18%),linear-gradient(0deg,var(--navy) 0,rgba(10,26,47,.72) 36%,rgba(10,26,47,0) 64%)}
+  .hero::before{display:none}
+  .hero .loc{margin-bottom:12px}
   .wejscia{grid-template-columns:1fr;border-top:0;padding:0 18px 18px;gap:8px;background:var(--navy)}
   .wej{flex-direction:row;align-items:center;padding:16px 16px;border:1px solid var(--rule);background:var(--navy2)}
   .wej:last-child{border-right:1px solid var(--rule)}
@@ -208,8 +212,9 @@ footer .w{display:flex;justify-content:space-between;align-items:center;gap:20px
   .kontakt iframe{min-height:300px}
   footer{padding-bottom:110px}
   .wersja{bottom:74px;right:10px}
-  .dol{display:grid;grid-template-columns:62px 1fr;position:fixed;left:0;right:0;bottom:0;z-index:30;padding-bottom:env(safe-area-inset-bottom);background:var(--navy);border-top:1px solid var(--rule)}
+  .dol{transform:translateY(110%);transition:transform .3s var(--ease);display:grid;grid-template-columns:62px 1fr;position:fixed;left:0;right:0;bottom:0;z-index:30;padding-bottom:env(safe-area-inset-bottom);background:var(--navy);border-top:1px solid var(--rule)}
   .dol a{display:grid;place-items:center;height:60px}
+  .dol.on{transform:none}
   .dol .tel{border-right:1px solid var(--rule)}
   .dol .r{background:var(--green);color:var(--navy);font:800 1.3rem "Barlow Condensed";text-transform:uppercase;letter-spacing:.02em}
 }
@@ -377,5 +382,10 @@ footer .w{display:flex;justify-content:space-between;align-items:center;gap:20px
   <a class="tel" href="tel:+48530783707" aria-label="Zadzwoń do recepcji"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2"/></svg></a>
   <a class="r" href="https://sportfactorypark.pl/rezerwacje/">Zarezerwuj kort</a>
 </nav>
+<script>
+(function(){var d=document.querySelector('.dol'),h=document.querySelector('.wejscia');
+if(!d||!h||!('IntersectionObserver' in window)){d&&d.classList.add('on');return}
+new IntersectionObserver(function(e){var r=e[0];d.classList.toggle('on',!r.isIntersecting&&r.boundingClientRect.top<0)}).observe(h)})();
+</script>
 </body>
 </html>
